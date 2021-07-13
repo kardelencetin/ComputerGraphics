@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<title>Homework 2</title>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+//TODO: add necessary modifications to perform translation and scaling operations
+attribute vec4 vPosition;
+uniform float xr;
+uniform float yr;
+
+uniform float vRed;
+uniform float vGreen;
+uniform float vBlue;
+
+varying float fRed;
+varying float fGreen;
+varying float fBlue;
+
+uniform float x;
+uniform float y;
+
+
+
+void main()
+{
+
+
+	gl_Position.x = vPosition.x * xr + x;
+	gl_Position.y = vPosition.y * yr + y;
+	gl_Position.z = 0.0;
+	gl_Position.w = 1.0;
+
+
+
+	//gl_PointSize = 10.0;
+
+	fRed = vRed;
+	fGreen = vGreen;
+	fBlue = vBlue;
+
+
+}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+//TODO: add necessary modifications for color
+
+precision mediump float;
+
+varying float fRed;
+varying float fGreen;
+varying float fBlue;
+
+void main()
+{
+    gl_FragColor = vec4(fRed, fGreen, fBlue, 1.0);
+}
+</script>
+
+<script type="text/javascript" src="../Common/webgl-utils.js"></script>
+<script type="text/javascript" src="../Common/initShaders.js"></script>
+<script type="text/javascript" src="../Common/MV.js"></script>
+<script type="text/javascript" src="hw2.js"></script>
+</head>
+
+<body style="background-color:powderblue;">
+
+<div>
+
+</div>
+<table>
+	<td>
+	<canvas id="gl-canvas" width="650" height="650">
+		Oops ... your browser doesn't support the HTML5 canvas element
+	</canvas>
+	</td>
+	<td>
+		<div> <strong>---- Ellipse Parameters ----</strong> </div><br>
+		<div> Resolution: </div><br>
+		<div>
+		<input type="radio" name="theta" id="theta1" value="1" > 1
+		<input type="radio" name="theta" id="theta2" value="10" checked> 10
+		<input type="radio" name="theta" id="theta3" value="20"> 20
+		<input type="radio" name="theta" id="theta4" value="30"> 30
+		<input type="radio" name="theta" id="theta5" value="60"> 60 degrees
+		</div>
+
+		<div>
+		x-radius: 0.1<input id="xrSlider" type="range"
+		 min="0.1" max="0.5" step="0.05" value="0.2" />0.5
+		</div>
+		<div>
+		y-radius: 0.1<input id="yrSlider" type="range"
+		 min="0.1" max="0.5" step="0.05" value="0.1" />0.5
+		</div>
+
+		<br>
+
+		<div> <strong>---- Color ----</strong> </div><br>
+		<div>
+		R: 0<input id="redSlider" type="range"
+		 min="0" max="1" step="0.05" value="1" />1
+		</div>
+		<div>
+		G: 0<input id="greenSlider" type="range"
+		 min="0" max="1" step="0.05" value="0" />1
+		</div>
+		<div>
+		B: 0<input id="blueSlider" type="range"
+		 min="0" max="1" step="0.05" value="0" />1
+		</div>
+		<br>
+
+		<div> <strong>---- Transformations ----</strong> </div><br>
+
+		<div>Position</div>
+		<div>X: -1<input id="posX" type="range"
+		 min="-1" max="1" step="0.05" value="0" />1</div>
+		<div>Y: -1<input id="posY" type="range"
+		 min="-1" max="1" step="0.05" value="0" />1</div><br>
+
+		<div>Scale</div>
+		<div>X: 0<input id="scaleX" type="range"
+		 min="0" max="2" step="0.05" value="1" />2</div>
+		<div>Y: 0<input id="scaleY" type="range"
+		 min="0" max="2" step="0.05" value="1" />2</div><br>
+
+		<br>
+	</td>
+
+</table>
+<div>
+</body>
+</html>
